@@ -3,6 +3,7 @@ const axios = require('axios')
 const bookingRouter = require('express').Router()
 
 bookingRouter.get('/', async (req, res) => {
+  
   try {
     const { data: dataProduct } = await axios.get('/product/')
     const { data: dataProgram } = await axios.get('/program/')

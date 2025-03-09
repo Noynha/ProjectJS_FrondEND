@@ -1,0 +1,103 @@
+/* กำหนดพื้นหลังให้กับทั้งหน้า */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff7f50, #ff1493);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* ตั้งค่าให้ส่วนเนื้อหาหลักมีพื้นที่ว่างรอบๆ */
+section {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+}
+
+/* กำหนดสไตล์ของหัวข้อ */
+h1 {
+    text-align: center;
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* ตารางแสดงข้อมูล */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* สไตล์ของแต่ละแถวในตาราง */
+th, td {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+/* สไตล์ของหัวตาราง */
+th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* เพิ่มการไฮไลต์แถวในตารางเมื่อชี้เมาส์ไป */
+tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+/* การเปลี่ยนแปลงพื้นหลังแถวคู่ในตาราง */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* เพิ่มการเว้นระยะห่างระหว่างตาราง */
+tbody tr {
+    transition: transform 0.3s ease;
+}
+
+/* ตารางยืดหยุ่นที่สามารถเลื่อนซ้ายขวา */
+.table-container {
+    overflow-x: auto;
+}
+
+/* สไตล์ของปุ่มที่ใช้ในฟอร์ม หรือ Input */
+td input[type="number"] {
+    padding: 8px;
+    width: 100px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+td input[type="number"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* สไตล์ของตารางภายใน */
+.table-container {
+    margin-top: 30px;
+}
+
+/* เพิ่มช่องว่างสำหรับการปรับขนาด */
+.container {
+    padding: 0 20px;
+}
+
+/* สไตล์การแสดงผลในกรณีที่ไม่มีข้อมูล */
+.no-data {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+}

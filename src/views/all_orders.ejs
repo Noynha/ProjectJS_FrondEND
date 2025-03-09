@@ -4,14 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ออเดอร์ทั้งหมด</title>
+    <link rel="stylesheet" href="/css/all_orders_style.css">
+
 </head>
 <body>
     <%- include('./component/nav.ejs') %>
-    <section>
-        <div>
-            <p>orders จ้าาา</p>
+    <section class="container">
+        <h1>ออเดอร์ทั้งหมด</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>หมายเลขออเดอร์</th>
+                        <th>ชื่อลูกค้า</th>
+                        <th>วันที่ส่งผ้า</th>
+                        <th>วันที่รับผ้า</th>
+                        <th>สถานะ</th>
+                        <th>ประเภทสินค้า</th>
+                        <th>จำนวนส่งซัก</th>
+                        <th>ราคาสินค้า</th>
+                        <th>ค่าบริการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (list_report.length > 0) { %>
+                        <% for (let i = 0; i < list_report.length; i++) { %>
+                            <tr>
+                                <td><%= list_report[i].orders_id %></td>
+                                <td><%= list_report[i].customer_name %></td>
+                                <td><%= list_report[i].drop_at %></td>
+                                <td><%= list_report[i].take_at %></td>
+                                <td><%= list_report[i].status || 'N/A' %></td>
+                                <td><%= list_report[i].product_type || 'N/A' %></td>
+                                <td><%= list_report[i].item %></td>
+                                <td><%= list_report[i].product_price || 'N/A' %></td>
+                                <td><%= list_report[i].total_price %></td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <tr class="no-data">
+                            <td colspan="10">ไม่มีข้อมูลออเดอร์</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
         </div>
-
     </section>
 </body>
 </html>
