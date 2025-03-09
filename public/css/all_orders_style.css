@@ -1,76 +1,106 @@
-/* กำหนดพื้นหลังให้กับทั้งหน้า */
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ff7f50, #ff1493);
+@import url('https://fonts.googleapis.com/css2?family=Krub:wght@200;300;400;500;600;700&family=Thasadith:wght@400;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
-    color: #333;
+    box-sizing: border-box;
+}
+
+/* กำหนดพื้นหลังให้กับทั้งหน้า */
+body {
+    font-family: 'Krub', sans-serif;
+    background: linear-gradient(135deg, #BFF5DC, #C2E9FB, #B5A8E9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #2c3e50;
 }
 
 /* ตั้งค่าให้ส่วนเนื้อหาหลักมีพื้นที่ว่างรอบๆ */
-section {
-    margin: 30px auto;
+.container {
+    background: #ffffff;
     padding: 20px;
-    background-color: #fff;
     border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 1200px;
+    width: 100%;
+    text-align: center;
 }
 
 /* กำหนดสไตล์ของหัวข้อ */
 h1 {
-    text-align: center;
+    color: #4caeb9;
+    margin-top: 20px;
     font-size: 32px;
-    color: #333;
-    margin-bottom: 30px;
     font-weight: 700;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+/* เอฟเฟกต์ Hover สำหรับหัวข้อ */
+h1:hover {
+    transform: scale(1.05);
 }
 
 /* ตารางแสดงข้อมูล */
 table {
     width: 100%;
     border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
 /* สไตล์ของแต่ละแถวในตาราง */
 th, td {
-    padding: 16px;
-    text-align: center;
+    padding: 12px;
     border: 1px solid #ddd;
     font-size: 16px;
-    vertical-align: middle;
+    text-align: center;
 }
 
 /* สไตล์ของหัวตาราง */
 th {
-    background-color: #4CAF50;
+    background-color: #0da099;
     color: white;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-/* เพิ่มการไฮไลต์แถวในตารางเมื่อชี้เมาส์ไป */
-tr:hover {
-    background-color: #f1f1f1;
-    transition: background-color 0.3s ease;
-}
-
 /* การเปลี่ยนแปลงพื้นหลังแถวคู่ในตาราง */
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background: #f0fdfa;
 }
 
-/* เพิ่มการเว้นระยะห่างระหว่างตาราง */
-tbody tr {
-    transition: transform 0.3s ease;
+/* เพิ่มการไฮไลต์แถวในตารางเมื่อชี้เมาส์ไป */
+tr:hover {
+    background: #e0f7fa;
+    transform: scale(1.02);
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* ตารางยืดหยุ่นที่สามารถเลื่อนซ้ายขวา */
-.table-container {
-    overflow-x: auto;
+/* สไตล์ของปุ่ม */
+button {
+    background-color: #00695c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* สไตล์ของปุ่มที่ใช้ในฟอร์ม หรือ Input */
+/* เอฟเฟกต์ Hover สำหรับปุ่ม */
+button:hover {
+    background-color: #87c2b8;
+    transform: scale(1.05);
+}
+
+/* สไตล์ของ Input ป้อนข้อมูล */
 td input[type="number"] {
     padding: 8px;
     width: 100px;
@@ -81,18 +111,8 @@ td input[type="number"] {
 }
 
 td input[type="number"]:focus {
-    border-color: #4CAF50;
+    border-color: #558a9b;
     outline: none;
-}
-
-/* สไตล์ของตารางภายใน */
-.table-container {
-    margin-top: 30px;
-}
-
-/* เพิ่มช่องว่างสำหรับการปรับขนาด */
-.container {
-    padding: 0 20px;
 }
 
 /* สไตล์การแสดงผลในกรณีที่ไม่มีข้อมูล */
