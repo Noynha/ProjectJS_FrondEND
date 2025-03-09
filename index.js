@@ -3,13 +3,18 @@ const cors = require('cors')
 const morgan = require('morgan')
 const path = require('path')
 const router = require('./src/routes')
+const axios = require('axios')
+const bodyParser = require('body-parser');
+
+axios.defaults.baseURL = 'http://localhost:5000/api'
 
 const app = express()
-const port = 4000
+const port = 5500
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'src/views'))
 
+app.use(bodyParser.urlencoded())
 app.use(express.json())
 app.use(cors())
 app.use(morgan('dev'))

@@ -8,5 +8,98 @@
 <body>
   <%- include('./component/nav.ejs') %>
     
+  <section>
+    <form action="/booking" method="POST">
+      <!-- 1 -->
+      <div>
+        <p>1. ประเภทเสื้อผ้า</p>
+        <table>
+          <thead>
+            <tr>
+              <th>ประเภทเสื้อผ้า</th>
+              <th>ราคาต่อชิ้น</th>
+              <th>จำนวนส่งซัก</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < list_product.length; i++) { %>
+              <tr>
+                <td><%= list_product[i].product_type %></td>
+                <td><%= list_product[i].product_price %></td>
+                <td><input type="number" name="select_product|<%= list_product[i].product_id %>" value="" /></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 2 -->
+      <div>
+        <p>2. บริการ</p>
+        <div>
+          <ul style="list-style-type: none;">
+            <% for (let i = 0; i < list_program.length; i++) { %>
+            <li>
+              <input type="radio" name="radio_program" value="<%= list_program[i].program_id %>">
+              <span>
+                <%= list_program[i].program_type %>
+              </span>
+              <span>
+                ค่าบริการ <%= list_program[i].program_price %> บาท/ตัว
+              </span>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div>
+        <p>3. เวลาที่ส่งผ้า</p>
+        <div style="display: flex; flex-direction: row; gap: 4rem;">
+          <div>
+            <p>เวลาที่ส่ง</p>
+            <input type="date" name="date_drop" />
+            <ul style="list-style-type: none;">
+              <li>
+                <input type="radio" name="radio_time_drop" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
+              </li>
+              <li>
+                <input type="radio" name="radio_time_drop" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
+              </li>
+              <li>
+                <input type="radio" name="radio_time_drop" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p>เวลาที่รับ</p>
+            <input type="date" name="date_take">
+            <ul style="list-style-type: none;">
+              <li>
+                <input type="radio" name="radio_time_take" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
+              </li>
+              <li>
+                <input type="radio" name="radio_time_take" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
+              </li>
+              <li>
+                <input type="radio" name="radio_time_take" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button  -->
+      <div>
+        <button
+          type="submit"
+        >
+          จองคิว
+        </button>
+      </div>
+    </form>
+  </section>
+
 </body>
 </html>
