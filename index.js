@@ -14,7 +14,7 @@ const port = 5500
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'src/views'))
 
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true })) 
 app.use(express.json())
 app.use(cors())
 app.use(morgan('dev'))
