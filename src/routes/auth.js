@@ -1,47 +1,59 @@
+const express = require('express')
 const axios = require('axios')
 
-const auth = require('express').Router()
+const authRouter = express.Router()
 
+// แสดงหน้า Login
+authRouter.get('/login', (req, res) => {
+  res.render('login', { error: null })
+})
 
-auth.get('/register', (req, res) => {
-    res.render('register');
-});
+// แสดงหน้า Register
+authRouter.get('/register', (req, res) => {
+  res.render('register', { error: null })
+})
 
-auth.get('/login', (req, res) => {
-    res.render('login');
-});
+// ดำเนินการ Login
+authRouter.post('/login', async (req, res) => {
+  try {
+    const { customer_name, customer_phone } = req.body
 
-auth.post('/register', async (req, res) => {
-    try {
-        const { name, phone } = req.body;
+    const response = await axios.post('http://localhost:5000/api/customer', {
+      type: 'login',
+      name: customer_name,
+      phone: customer_phone
+    })
 
-        // ส่งข้อมูลไปที่ backend
-        const response = await axios.post('http://localhost:5000/api/customers', {
-            type: 'register',
-            name,
-            phone
-        });
-
-        res.render('register', { message: response.data.message, error: null });
-    } catch (error) {
-        res.render('register', { message: null, error: error.response?.data?.message || 'Registration failed' });
+    // ถ้า Login สำเร็จ
+    if (response.data.message === 'Login successful') {
+      res.redirect('/')
+    } else {
+      res.render('login', { error: 'Invalid name or phone' })
     }
-});
+  } catch (error) {
+    res.render('login', { error: 'Invalid name or phone' })
+  }
+})
 
-auth.post('/login', async (req, res) => {
-    try {
-        const { name, phone } = req.body;
+// ดำเนินการ Register
+authRouter.post('/register', async (req, res) => {
+  try {
+    const { customer_name, customer_phone } = req.body
 
-        const response = await axios.post('http://localhost:5000/api/customers', {
-            type: 'login',
-            name,
-            phone
-        });
+    const response = await axios.post('/customer', {
+      type: 'register',
+      name: customer_name,
+      phone: customer_phone
+    })
 
-        res.render('login', { message: response.data.message, error: null });
-    } catch (error) {
-        res.render('login', { message: null, error: error.response?.data?.message || 'Login failed' });
+    if (response.data.message === 'Customer created') {
+      res.redirect('/login')
+    } else {
+      res.render('register', { error: 'Customer already exists' })
     }
-});
+  } catch (error) {
+    res.render('register', { error: 'Registration failed' })
+  }
+})
 
-module.exports = auth;
+module.exports = authRouter

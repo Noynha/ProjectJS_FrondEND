@@ -7,21 +7,25 @@
 </head>
 <body>
     <body>
+        <%- include('./component/nav.ejs') %>
+
         <h2>Register</h2>
-        <% if (message) { %>
-            <p style="color: green;"><%= message %></p>
-        <% } %>
+
         <% if (error) { %>
-            <p style="color: red;"><%= error %></p>
-        <% } %>
-        <form action="/auth/register" method="POST">
-            <label>Name:</label>
-            <input type="text" name="name" required><br>
-            <label>Phone:</label>
-            <input type="text" name="phone" required><br>
-            <button type="submit">Register</button>
-        </form>
-        <p>Already registered? <a href="/auth/login">Login here</a></p>
+  <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form action="/auth/register" method="POST">
+  <label for="customer_name">Name:</label>
+  <input type="text" id="customer_name" name="customer_name" required>
+  
+  <label for="customer_phone">Phone:</label>
+  <input type="text" id="customer_phone" name="customer_phone" required>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="/auth/login">Login here</a></p>
     </body>
 </body>
 </html>
