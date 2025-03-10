@@ -55,7 +55,24 @@ bookingRouter.post('/', async (req, res) => {
       name:customer_name,
       phone:customer_phone
     })
+
+    const customerId = user.data.customer_id;
+
+    const order = await axios.post('/orders/',{
+      customer_id: customerId ,
+      drop_at:date_drop,
+      take_at:date_take
+    })
     
+    const orderId = order.data.orders_id;
+
+    const ordersDetail = await axios.post('/order_detail/',{
+      orders_id:orderId,
+      product_id:select_products.id,
+      program_id:radio_program,
+      item:select_products.value
+    })
+
   } catch (error) {
     res.send('Error!!')
   }
