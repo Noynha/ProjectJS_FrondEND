@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% if (list_report.length > 0) { %>
+                    <% if (list_report && list_report.length > 0) { %>
                         <% for (let i = 0; i < list_report.length; i++) { %>
                             <tr>
                                 <td><%= list_report[i].orders_id %></td>
@@ -43,7 +43,7 @@
                         <% } %>
                     <% } else { %>
                         <tr class="no-data">
-                            <td colspan="10">ไม่มีข้อมูลออเดอร์</td>
+                            <td colspan="9">ไม่มีข้อมูลออเดอร์</td>
                         </tr>
                     <% } %>
                 </tbody>
