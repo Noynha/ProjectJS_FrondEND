@@ -23,3 +23,146 @@ body {
     width: 100%;
     text-align: center;
 }
+/* กำหนดให้ส่วนเนื้อหาหลักมีพื้นที่ว่างรอบๆ */
+section {
+    /* background-color: white; */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: auto; /* จำกัดขนาดของฟอร์ม */
+}
+
+/* ตกแต่งส่วนหัวของฟอร์ม */
+p {
+    font-size: 22px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* สไตล์สำหรับตาราง */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #0da099;
+    color: white;
+    text-transform: uppercase;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+/* สไตล์สำหรับ input และ select */
+input[type="number"], input[type="date"], input[type="radio"] {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+}
+
+input[type="radio"] {
+    margin-left: 10px;
+}
+
+input[type="radio"]:checked {
+    background-color: #00796b;
+}
+
+/* สไตล์สำหรับรายการบริการ */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li span {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+li span:first-child {
+    font-weight: bold;
+}
+
+ul li:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+/* สไตล์สำหรับปุ่ม */
+button {
+    background-color: #00796b;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #004d40;
+    transition: background-color 0.3s ease;
+}
+
+/* การจัดรูปแบบ layout ของฟอร์ม */
+div {
+    margin-bottom: 20px;
+}
+
+/* การจัด layout ของเวลาที่ส่งและรับผ้า */
+section > div {
+    display: flex;
+    gap: 4rem;
+}
+
+section > div > div {
+    flex: 1;
+}
+
+/* เพิ่มระยะห่างและปรับแต่งการจัดเรียงรายการ */
+input[type="radio"]:checked + span {
+    font-weight: bold;
+}
+button {
+    font-family: 'Krub', sans-serif; /* กำหนดฟอนต์ Krub */
+    font-size: 16px; /* ขนาดตัวอักษร */
+    padding: 12px 24px; /* ขนาดของปุ่ม */
+    background-color: #00796b; /* สีพื้นหลัง */
+    color: white; /* สีตัวอักษร */
+    border: none; /* ไม่มีขอบ */
+    border-radius: 8px; /* มุมโค้ง */
+    cursor: pointer; /* เปลี่ยนเคอร์เซอร์เมื่อชี้ไปที่ปุ่ม */
+    width: 100%; /* ให้ปุ่มกว้างเต็ม */
+    text-transform: uppercase; /* ทำให้ข้อความเป็นตัวพิมพ์ใหญ่ */
+    transition: background-color 0.3s ease; /* เพิ่มการเปลี่ยนแปลงสีพื้นหลังเมื่อ hover */
+}
+
+button:hover {
+    background-color: #004d40; /* สีพื้นหลังเมื่อ hover */
+}
