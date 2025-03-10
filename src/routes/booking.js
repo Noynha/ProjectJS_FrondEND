@@ -1,21 +1,20 @@
-const axios = require('axios')
-const bookingRouter = require('express').Router()
-
+const axios = require('axios');
+const bookingRouter = require('express').Router();
 
 bookingRouter.get('/', async (req, res) => {
-
   try {
-    const { data: dataProduct } = await axios.get('/product/')
-    const { data: dataProgram } = await axios.get('/program/')
-    
+    const { data: dataProduct } = await axios.get('/product');
+    const { data: dataProgram } = await axios.get('/program');
+
     res.render('booking', {
-      list_product: dataProduct.data,
-      list_program: dataProgram.data
-    })
+      list_product: dataProduct,
+      list_program: dataProgram
+    });
   } catch (error) {
-    res.send('Error!!')
+    console.error('Error fetching products or programs:', error.message);
+    res.status(500).send('Error fetching booking data!');
   }
-})
+});
 
 bookingRouter.post('/', async (req, res) => {
   try {
@@ -27,55 +26,66 @@ bookingRouter.post('/', async (req, res) => {
       radio_time_take,
       customer_name,
       customer_phone
-    } = req.body
+    } = req.body;
 
-    console.log('req.body', req.body)
+    console.log('req.body', req.body);
 
-    let select_products = []
+    let select_products = [];
     Object.entries(req.body).forEach(([key, value]) => {
       if (key.includes('select_product')) {
         select_products.push({
           id: key.replace('select_product|', ''),
-          value: value
-        })
+          value: parseInt(value) || 0
+        });
       }
-    })
+    });
 
-    console.log('select_products', select_products)
-    console.log('radio_program', radio_program)
-    console.log('datetime_drop', date_drop ) // 10/10/2021, 10:00
-    console.log('datetime_take', date_take)
-    console.log('radio_time_drop', radio_time_drop)
-    console.log('radio_time_take', radio_time_take ) // 10/10/2021, 10:00
-    console.log('customer_name', customer_name)
-    console.log('customer_phone', customer_phone)
-    res.send('Booking Crreated!!')
+    console.log('select_products', select_products);
 
-    const user = await axios.post('/customer/',{
-      name:customer_name,
-      phone:customer_phone
-    })
+    // ✅ ตรวจสอบว่ามีลูกค้าอยู่แล้วหรือไม่
+    const { data: existingCustomer } = await axios.get(`/customer?name=${customer_name}&phone=${customer_phone}`);
 
-    const customerId = user.data.customer_id;
+    let customerId;
+    if (existingCustomer && existingCustomer.customer_id) {
+      customerId = existingCustomer.customer_id;
+    } else {
+      // ✅ ถ้ายังไม่มี → สร้างลูกค้าใหม่
+      const { data: newCustomer } = await axios.post('/customer', {
+        customer_name,
+        customer_phone
+      });
+      customerId = newCustomer.customer_id;
+    }
 
-    const order = await axios.post('/orders/',{
-      customer_id: customerId ,
-      drop_at:date_drop,
-      take_at:date_take
-    })
-    
-    const orderId = order.data.orders_id;
+    // ✅ สร้าง order ใหม่
+    const { data: newOrder } = await axios.post('/orders', {
+      customer_id: customerId,
+      drop_at: `${date_drop} ${radio_time_drop}`,
+      take_at: `${date_take} ${radio_time_take}`,
+      status: 'pending'
+    });
 
-    const ordersDetail = await axios.post('/order_detail/',{
-      orders_id:orderId,
-      product_id:select_products.id,
-      program_id:radio_program,
-      item:select_products.value
-    })
+    const orderId = newOrder.orders_id;
+
+    // ✅ บันทึก order_detail
+    for (const product of select_products) {
+      if (product.value > 0) { // ส่งเฉพาะสินค้าที่มีจำนวนมากกว่า 0
+        await axios.post('/order_detail', {
+          orders_id: orderId,
+          product_id: product.id,
+          program_id: radio_program,
+          item: product.value
+        });
+      }
+    }
+
+    // ✅ ตอบกลับเมื่อทุกอย่างเสร็จสมบูรณ์
+    res.status(201).json({ message: 'Booking Created!', orders_id: orderId });
 
   } catch (error) {
-    res.send('Error!!')
+    console.error('Error creating booking:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
-})
+});
 
-module.exports = bookingRouter
+module.exports = bookingRouter;
