@@ -18,7 +18,7 @@ authRouter.post('/login', async (req, res) => {
   try {
     const { customer_name, customer_phone } = req.body
 
-    const response = await axios.post('http://localhost:5000/api/customer', {
+    const response = await axios.post('/customer', {
       type: 'login',
       name: customer_name,
       phone: customer_phone
