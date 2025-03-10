@@ -1,6 +1,6 @@
 const axios = require('axios')
-
 const bookingRouter = require('express').Router()
+
 
 bookingRouter.get('/', async (req, res) => {
 
@@ -41,12 +41,21 @@ bookingRouter.post('/', async (req, res) => {
       }
     })
 
-    // console.log('select_products', select_products)
-    // console.log('radio_program', radio_program)
-    // console.log('datetime_drop', date_drop ) // 10/10/2021, 10:00
-    // console.log('datetime_take', date_take)
-
+    console.log('select_products', select_products)
+    console.log('radio_program', radio_program)
+    console.log('datetime_drop', date_drop ) // 10/10/2021, 10:00
+    console.log('datetime_take', date_take)
+    console.log('radio_time_drop', radio_time_drop)
+    console.log('radio_time_take', radio_time_take ) // 10/10/2021, 10:00
+    console.log('customer_name', customer_name)
+    console.log('customer_phone', customer_phone)
     res.send('Booking Crreated!!')
+
+    const user = await axios.post('/customer/',{
+      name:customer_name,
+      phone:customer_phone
+    })
+    
   } catch (error) {
     res.send('Error!!')
   }
