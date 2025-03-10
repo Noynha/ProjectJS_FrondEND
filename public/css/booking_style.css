@@ -25,12 +25,12 @@ body {
 }
 /* กำหนดให้ส่วนเนื้อหาหลักมีพื้นที่ว่างรอบๆ */
 section {
-    /* background-color: white; */
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: auto; /* จำกัดขนาดของฟอร์ม */
+   
+    width: 250%; /* ลดความกว้างของฟอร์มลง */
+    max-width: 1000px; /* จำกัดความกว้างสูงสุด */
+    margin: 0 auto; /* จัดฟอร์มให้อยู่ตรงกลาง */
 }
 
 /* ตกแต่งส่วนหัวของฟอร์ม */
