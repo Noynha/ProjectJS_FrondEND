@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const bookingRouter = require('./booking')
 const allOrdersRouter = require('./all_orders');
-// const loginRegisRouter = require('./login_regis');
+// const auth = require('./auth');
 const { default: axios } = require('axios');
 
 // Routes (หน้าหลัก/หน้าแรก)
@@ -29,6 +29,6 @@ router.get('/', async (req, res) => {
 router.use('/index',router)
 router.use('/booking', bookingRouter)
 router.use('/all_orders',allOrdersRouter)
-// router.use('/login_regis', loginRegisRouter);
+// router.use('/auth', auth);
  
 module.exports = router

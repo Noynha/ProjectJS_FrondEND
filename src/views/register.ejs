@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/loginandregiter_style.css">
+</head>
+<body>
+    <body>
+        <%- include('./component/nav.ejs') %>
+
+        <h2>Register</h2>
+
+        <% if (error) { %>
+  <p style="color: red;"><%= error %></p>
+<% } %>
+
+<form action="/auth/register" method="POST">
+  <label for="customer_name">Name:</label>
+  <input type="text" id="customer_name" name="customer_name" required>
+  
+  <label for="customer_phone">Phone:</label>
+  <input type="text" id="customer_phone" name="customer_phone" required>
+
+  <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="/auth/login">Login here</a></p>
+    </body>
+</body>
+</html>
