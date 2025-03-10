@@ -1,0 +1,60 @@
+/* รีเซ็ตค่าเริ่มต้น */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* สไตล์สำหรับแถบเมนูหลัก */
+  nav {
+    background-color: #f1f1f1; /* พื้นหลังสีเทาอ่อน */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    border-bottom: 1px solid #ddd; /* เส้นขอบล่างที่บาง */
+  }
+  
+  /* สไตล์ของชื่อแบรนด์ */
+  .brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333; /* สีตัวอักษร */
+    letter-spacing: 2px;
+    text-transform: uppercase; /* ตัวอักษรเป็นตัวพิมพ์ใหญ่ทั้งหมด */
+  }
+  
+  /* สไตล์ของลิงก์ในเมนู */
+  .links {
+    display: flex;
+    gap: 30px; /* ระยะห่างระหว่างลิงก์ */
+  }
+  
+  .links a {
+    color: #333; /* สีของลิงก์ */
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  /* เอฟเฟกต์เมื่อวางเมาส์ */
+  .links a:hover {
+    background-color: #007bff; /* สีพื้นหลังเมื่อวางเมาส์ */
+    color: white; /* สีข้อความเมื่อวางเมาส์ */
+  }
+  
+  /* ความสามารถในการตอบสนอง (Responsive) สำหรับหน้าจอขนาดเล็ก */
+  @media (max-width: 768px) {
+    .links {
+      flex-direction: column; /* ลิงก์เรียงกันในแนวตั้ง */
+      align-items: center;
+      gap: 10px; /* ระยะห่างระหว่างลิงก์ */
+    }
+  
+    .brand {
+      font-size: 1.6rem; /* ขนาดของชื่อแบรนด์เล็กลงในหน้าจอเล็ก */
+    }
+  }
+  
