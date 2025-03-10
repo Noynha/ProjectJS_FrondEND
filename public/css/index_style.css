@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Krub:wght@200;300;400;500;600;700&family=Thasadith:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* พื้นหลังและการจัดการแบบทั่วไป */
+body {
+    font-family: 'Krub', sans-serif;
+    background: linear-gradient(135deg, #BFF5DC, #C2E9FB, #B5A8E9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    color: #2c3e50;
+}
+
+/* กล่องตาราง */
+.container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    max-width: 1400px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ตาราง */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* หัวตาราง */
+th {
+    background: linear-gradient(135deg, #0da099, #00796b);
+    color: white;
+    font-size: 17px;
+    padding: 15px;
+    text-transform: uppercase;
+    border-radius: 8px 8px 0 0;
+}
+
+/* แถวตาราง */
+td {
+    font-size: 16px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+    background: #f0fdfa;
+}
+
+/* สีสลับแถว */
+tr:nth-child(even) {
+    background: #f0fdfa;
+}
+
+/* เอฟเฟกต์ Hover */
+tr:hover {
+    background: rgba(0, 121, 107, 0.3);
+    transform: scale(1.02);
+    transition: all 0.3s ease-in-out;
+}
+
+/* ตกแต่ง <p> สำหรับหัวข้อ 2. บริการ */
+p {
+    font-size: 22px; /* ขนาดตัวอักษร */
+    font-weight: bold; /* ทำให้ตัวอักษรหนา */
+    color: #000000; /* สีของข้อความ */
+    margin-top: 30px; /* ระยะห่างด้านบน */
+    text-align: center; /* จัดตำแหน่งให้ข้อความอยู่กลาง */
+    text-transform: uppercase; /* ทำให้ข้อความทั้งหมดเป็นตัวพิมพ์ใหญ่ */
+    letter-spacing: 1px; /* เพิ่มระยะห่างระหว่างตัวอักษร */
+   
+    
+   
+}
+
+
+/* ส่วนสำหรับรายการในบริการ */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+li span {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+li span:first-child {
+    font-weight: bold;
+}
+
+/* เพิ่มความชัดเจนในการแสดงผลรายการ */
+ul li:hover {
+    background-color: #e0f7fa;
+    cursor: pointer;
+}
+
+/* กำหนดความกว้างของตาราง */
+.table-container {
+    width: 100%;
+    max-width: 1400px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
