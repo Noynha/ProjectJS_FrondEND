@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     // }
 
     res.render('index', {
-      list_product: dataProduct.product || [],  
+       list_product: dataProduct.product || [],  
       list_program: dataProgram.programs || [] 
     });
 
@@ -36,5 +36,3 @@ router.use('/all_orders',allOrdersRouter)
 // router.use('/auth', auth);
  
 module.exports = router
-
-console.log("แนนนั่กินกระดาษ")
