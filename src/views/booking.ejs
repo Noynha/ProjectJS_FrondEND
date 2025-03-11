@@ -28,8 +28,10 @@
               <tr>
                 <td><%= products[i].product_type %></td>
                 <td><%= products[i].product_price %></td>
-                <td><input type="number" name="select_product|<%= products[i].product_id %>" value="" /></td>
-              </tr>
+                <td>
+                  <input type="number" name="select_product|<%= products[i].product_id %>" value="0" min="0" />
+                </td>
+                              </tr>
             <% } %>
           </tbody>
         </table>

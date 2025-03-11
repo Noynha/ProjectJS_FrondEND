@@ -5,10 +5,6 @@ bookingRouter.get('/', async (req, res) => {
   try {
     const { data: dataProducts } = await axios.get('http://localhost:5000/api/product');
     const { data: dataPrograms } = await axios.get('http://localhost:5000/api/program');
-
-
-   
-  
     res.render('booking', {
       products: dataProducts.products,   
       programs: dataPrograms.programs  
@@ -21,7 +17,7 @@ bookingRouter.get('/', async (req, res) => {
 
 bookingRouter.post('/', async (req, res) => {
   try {
-    res.send(req.body.radio_program)
+    //res.send(req.body)
     //res.send(req.body)
     const {
       radio_program,
@@ -33,7 +29,7 @@ bookingRouter.post('/', async (req, res) => {
       customer_phone
 } = req.body;
 
-    console.log('req.body', req.body);
+    c
 
     let select_products = [];
     Object.entries(req.body).forEach(([key, value]) => {
@@ -44,12 +40,12 @@ bookingRouter.post('/', async (req, res) => {
         });
       }
     });
-
-    console.log('select_products', select_products);
+    
+    //res.send(select_products);
 
     // ✅ ตรวจสอบว่ามีลูกค้าอยู่แล้วหรือไม่
     const { data: existingCustomer } = await axios.get(`/customer?name=${customer_name}&phone=${customer_phone}`);
-
+    console.log()
     let customerId;
     if (existingCustomer && existingCustomer.customer_id) {
       customerId = existingCustomer.customer_id;

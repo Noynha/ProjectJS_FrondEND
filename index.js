@@ -27,5 +27,5 @@ const msg = `Frontend server running on port ${port}`
 // })
 
 app.listen(port, () => {
-  console.log(msg)
+  console.log(`Server is running on http://localhost:${port}`)
 })
