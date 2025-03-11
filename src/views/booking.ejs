@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>อัตราค่าบริการ</title>
     <link rel="stylesheet" href="/css/booking_style.css">
-
 </head>
 <body>
   <%- include('./component/nav.ejs') %>
     
   <section>
-    <form action="/booking" method="POST">
+    <form action="/booking" method="POST" id="bookingForm" novalidate>
       <!-- 1 -->
       <div>
         <p>1. ประเภทเสื้อผ้า</p>
+        <div id="productsError" class="error-text">กรุณาเลือกเสื้อผ้าอย่างน้อย 1 ชิ้น</div>
         <table>
           <thead>
             <tr>
@@ -29,9 +29,9 @@
                 <td><%= products[i].product_type %></td>
                 <td><%= products[i].product_price %></td>
                 <td>
-                  <input type="number" name="select_product|<%= products[i].product_id %>" value="0" min="0" />
+                  <input type="number" class="product-qty" name="select_product|<%= products[i].product_id %>" value="0" min="0" />
                 </td>
-                              </tr>
+              </tr>
             <% } %>
           </tbody>
         </table>
@@ -40,11 +40,12 @@
       <!-- 2 -->
       <div>
         <p>2. บริการ</p>
+        <div id="programError" class="error-text">กรุณาเลือกบริการ</div>
         <div>
           <ul style="list-style-type: none;">
             <% for (let i = 0; i < programs.length; i++) { %>
             <li>
-              <input type="radio" name="radio_program" value="<%= programs[i].program_id %>">
+              <input type="radio" name="radio_program" class="program-radio" value="<%= programs[i].program_id %>">
               <span>
                 <%= programs[i].program_type %>
               </span>
@@ -63,33 +64,37 @@
         <div style="display: flex; flex-direction: row; gap: 4rem;">
           <div>
             <p>เวลาที่ส่ง</p>
-            <input type="date" name="date_drop" />
+            <input type="date" name="date_drop" id="date_drop" />
+            <div id="dateDropError" class="error-text">กรุณาเลือกวันที่ส่งผ้า</div>
             <ul style="list-style-type: none;">
               <li>
-                <input type="radio" name="radio_time_drop" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
+                <input type="radio" name="radio_time_drop" class="time-drop-radio" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
               </li>
               <li>
-                <input type="radio" name="radio_time_drop" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
+                <input type="radio" name="radio_time_drop" class="time-drop-radio" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
               </li>
               <li>
-                <input type="radio" name="radio_time_drop" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
+                <input type="radio" name="radio_time_drop" class="time-drop-radio" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
               </li>
             </ul>
+            <div id="timeDropError" class="error-text">กรุณาเลือกช่วงเวลาที่ส่งผ้า</div>
           </div>
           <div>
             <p>เวลาที่รับ</p>
-            <input type="date" name="date_take">
+            <input type="date" name="date_take" id="date_take">
+            <div id="dateTakeError" class="error-text">กรุณาเลือกวันที่รับผ้า</div>
             <ul style="list-style-type: none;">
               <li>
-                <input type="radio" name="radio_time_take" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
+                <input type="radio" name="radio_time_take" class="time-take-radio" value="10:00-12:00"> ช่วงเช้า 10:00 - 12:00
               </li>
               <li>
-                <input type="radio" name="radio_time_take" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
+                <input type="radio" name="radio_time_take" class="time-take-radio" value="14:00-18:00"> ช่วงบ่าย 14:00 - 18:00
               </li>
               <li>
-                <input type="radio" name="radio_time_take" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
+                <input type="radio" name="radio_time_take" class="time-take-radio" value="18:00-20:00"> ช่วงเย็น 18:00 - 20:00
               </li>
             </ul>
+            <div id="timeTakeError" class="error-text">กรุณาเลือกช่วงเวลาที่รับผ้า</div>
           </div>
         </div>
       </div>
@@ -106,8 +111,14 @@
           </thead>
           <tbody>
               <tr>
-                <td><input type="text" name="customer_name" /></td>
-                <td><input type="text" name="customer_phone" /></td>
+                <td>
+                  <input type="text" name="customer_name" id="customer_name" />
+                  <div id="customerNameError" class="error-text">กรุณากรอกชื่อลูกค้า</div>
+                </td>
+                <td>
+                  <input type="text" name="customer_phone" id="customer_phone" />
+                  <div id="customerPhoneError" class="error-text">กรุณากรอกเบอร์โทรให้ถูกต้อง</div>
+                </td>
               </tr>
           </tbody>
         </table>
@@ -115,14 +126,267 @@
 
       <!-- Button  -->
       <div>
-        <button
-          type="submit" 
-        >
-          จองคิว
-        </button>
+        <button type="submit">จองคิว</button>
       </div>
     </form>
   </section>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // รับอ้างอิงถึงอิลิเมนต์ฟอร์ม
+      const bookingForm = document.getElementById('bookingForm');
+      const dropDateInput = document.getElementById('date_drop');
+      const takeDateInput = document.getElementById('date_take');
+      const customerNameInput = document.getElementById('customer_name');
+      const customerPhoneInput = document.getElementById('customer_phone');
+      
+      // รับอ้างอิงถึงอิลิเมนต์แสดงข้อผิดพลาด
+      const productsError = document.getElementById('productsError');
+      const programError = document.getElementById('programError');
+      const dateDropError = document.getElementById('dateDropError');
+      const timeDropError = document.getElementById('timeDropError');
+      const dateTakeError = document.getElementById('dateTakeError');
+      const timeTakeError = document.getElementById('timeTakeError');
+      const customerNameError = document.getElementById('customerNameError');
+      const customerPhoneError = document.getElementById('customerPhoneError');
+      
+      // ฟังก์ชันแสดงข้อผิดพลาด
+      function showError(element, errorElement) {
+        if (element) element.classList.add('error-border');
+        if (errorElement) errorElement.style.display = 'block';
+      }
+      
+      // ฟังก์ชันซ่อนข้อผิดพลาด
+      function hideError(element, errorElement) {
+        if (element) element.classList.remove('error-border');
+        if (errorElement) errorElement.style.display = 'none';
+      }
+      
+      // ฟังก์ชันตรวจสอบว่ามีการเลือกเสื้อผ้าอย่างน้อย 1 ชิ้นหรือไม่
+      function validateProducts() {
+        const productInputs = document.querySelectorAll('.product-qty');
+        let totalQuantity = 0;
+        
+        productInputs.forEach(input => {
+          totalQuantity += parseInt(input.value) || 0;
+        });
+        
+        if (totalQuantity === 0) {
+          showError(null, productsError);
+          return false;
+        } else {
+          hideError(null, productsError);
+          return true;
+        }
+      }
+      
+      // ฟังก์ชันตรวจสอบว่ามีการเลือกบริการหรือไม่
+      function validateProgram() {
+        const programRadios = document.querySelectorAll('.program-radio');
+        let selected = false;
+        
+        programRadios.forEach(radio => {
+          if (radio.checked) {
+            selected = true;
+          }
+        });
+        
+        if (!selected) {
+          showError(null, programError);
+          return false;
+        } else {
+          hideError(null, programError);
+          return true;
+        }
+      }
+      
+      // ฟังก์ชันตรวจสอบวันและเวลาที่ส่งผ้า
+      function validateDropDateTime() {
+        const dateValid = dropDateInput.value !== '';
+        const timeDropRadios = document.querySelectorAll('.time-drop-radio');
+        let timeValid = false;
+        
+        timeDropRadios.forEach(radio => {
+          if (radio.checked) {
+            timeValid = true;
+          }
+        });
+        
+        if (!dateValid) {
+          showError(dropDateInput, dateDropError);
+        } else {
+          hideError(dropDateInput, dateDropError);
+        }
+        
+        if (!timeValid) {
+          showError(null, timeDropError);
+        } else {
+          hideError(null, timeDropError);
+        }
+        
+        return dateValid && timeValid;
+      }
+      
+      // ฟังก์ชันตรวจสอบวันและเวลาที่รับผ้า
+      function validateTakeDateTime() {
+        const dateValid = takeDateInput.value !== '';
+        const timeTakeRadios = document.querySelectorAll('.time-take-radio');
+        let timeValid = false;
+        
+        timeTakeRadios.forEach(radio => {
+          if (radio.checked) {
+            timeValid = true;
+          }
+        });
+        
+        if (!dateValid) {
+          showError(takeDateInput, dateTakeError);
+        } else {
+          hideError(takeDateInput, dateTakeError);
+        }
+        
+        if (!timeValid) {
+          showError(null, timeTakeError);
+        } else {
+          hideError(null, timeTakeError);
+        }
+        
+        return dateValid && timeValid;
+      }
+      
+      // ฟังก์ชันตรวจสอบความถูกต้องของวันที่
+      function validateDateRange() {
+        // ตรวจสอบว่าได้กรอกข้อมูลทั้งสองช่องหรือไม่
+        if (!dropDateInput.value || !takeDateInput.value) {
+          return true; // ถ้ายังไม่ได้กรอกข้อมูล ให้ผ่านไปก่อน
+        }
+        
+        // แปลงค่าวันที่เป็น Date objects
+        const dropDate = new Date(dropDateInput.value);
+        const takeDate = new Date(takeDateInput.value);
+        
+        // เปรียบเทียบวันที่
+        if (takeDate >= dropDate) {
+          hideError(takeDateInput, null);
+          return true;
+        } else {
+          showError(takeDateInput, null);
+          return false;
+        }
+      }
+      
+      // ฟังก์ชันตรวจสอบข้อมูลลูกค้า
+      function validateCustomerInfo() {
+        const nameValid = customerNameInput.value.trim() !== '';
+        const phoneRegex = /^[0-9]{9,10}$/; // เบอร์โทร 9-10 หลัก
+        const phoneValid = phoneRegex.test(customerPhoneInput.value.trim());
+        
+        if (!nameValid) {
+          showError(customerNameInput, customerNameError);
+        } else {
+          hideError(customerNameInput, customerNameError);
+        }
+        
+        if (!phoneValid) {
+          showError(customerPhoneInput, customerPhoneError);
+        } else {
+          hideError(customerPhoneInput, customerPhoneError);
+        }
+        
+        return nameValid && phoneValid;
+      }
+      
+      // ตรวจสอบเมื่อมีการเปลี่ยนแปลงค่าใน input date_take
+      takeDateInput.addEventListener('change', function() {
+        if (!validateDateRange()) {
+          alert('วันที่รับผ้าต้องมากกว่าหรือเท่ากับวันที่ส่งผ้า');
+          takeDateInput.value = ''; // ล้างค่าวันที่รับ
+        }
+      });
+      
+      // ตรวจสอบเมื่อมีการเปลี่ยนแปลงค่าใน input date_drop
+      dropDateInput.addEventListener('change', function() {
+        if (takeDateInput.value && !validateDateRange()) {
+          alert('วันที่รับผ้าต้องมากกว่าหรือเท่ากับวันที่ส่งผ้า');
+          takeDateInput.value = ''; // ล้างค่าวันที่รับ
+        }
+      });
+      
+      // เพิ่ม event listeners สำหรับการลบข้อความแสดงข้อผิดพลาดเมื่อผู้ใช้แก้ไข
+      const productInputs = document.querySelectorAll('.product-qty');
+      productInputs.forEach(input => {
+        input.addEventListener('change', validateProducts);
+      });
+      
+      const programRadios = document.querySelectorAll('.program-radio');
+      programRadios.forEach(radio => {
+        radio.addEventListener('change', validateProgram);
+      });
+      
+      dropDateInput.addEventListener('change', validateDropDateTime);
+      document.querySelectorAll('.time-drop-radio').forEach(radio => {
+        radio.addEventListener('change', validateDropDateTime);
+      });
+      
+      takeDateInput.addEventListener('change', validateTakeDateTime);
+      document.querySelectorAll('.time-take-radio').forEach(radio => {
+        radio.addEventListener('change', validateTakeDateTime);
+      });
+      
+      customerNameInput.addEventListener('input', function() {
+        if (customerNameInput.value.trim() !== '') {
+          hideError(customerNameInput, customerNameError);
+        }
+      });
+      
+      customerPhoneInput.addEventListener('input', function() {
+        const phoneRegex = /^[0-9]{9,10}$/;
+        if (phoneRegex.test(customerPhoneInput.value.trim())) {
+          hideError(customerPhoneInput, customerPhoneError);
+        }
+      });
+      
+      // ตรวจสอบเมื่อมีการ submit form
+      bookingForm.addEventListener('submit', function(event) {
+        // ตรวจสอบทุกฟิลด์
+        const isProductsValid = validateProducts();
+        const isProgramValid = validateProgram();
+        const isDropDateTimeValid = validateDropDateTime();
+        const isTakeDateTimeValid = validateTakeDateTime();
+        const isDateRangeValid = validateDateRange();
+        const isCustomerInfoValid = validateCustomerInfo();
+        
+        // ถ้ามีข้อผิดพลาดให้ยกเลิกการส่งฟอร์ม
+        if (!isProductsValid || !isProgramValid || 
+            !isDropDateTimeValid || !isTakeDateTimeValid || 
+            !isDateRangeValid || !isCustomerInfoValid) {
+          event.preventDefault();
+          
+          // แสดงข้อความแจ้งเตือน
+          if (!isDateRangeValid) {
+            alert('วันที่รับผ้าต้องมากกว่าหรือเท่ากับวันที่ส่งผ้า');
+          } else {
+            alert('กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง');
+          }
+          
+          // เลื่อนไปยัง element แรกที่มีข้อผิดพลาด
+          if (!isProductsValid) {
+            productsError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (!isProgramValid) {
+            programError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (!isDropDateTimeValid) {
+            (dateDropError.style.display === 'block' ? dateDropError : timeDropError)
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (!isTakeDateTimeValid || !isDateRangeValid) {
+            (dateTakeError.style.display === 'block' ? dateTakeError : timeTakeError)
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (!isCustomerInfoValid) {
+            (customerNameError.style.display === 'block' ? customerNameError : customerPhoneError)
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
