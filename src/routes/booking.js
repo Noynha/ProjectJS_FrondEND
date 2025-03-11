@@ -6,8 +6,8 @@ bookingRouter.get('/', async (req, res) => {
     const { data: dataProducts } = await axios.get('http://localhost:5000/api/product');
     const { data: dataPrograms } = await axios.get('http://localhost:5000/api/program');
     res.render('booking', {
-      products: dataProducts.products,   
-      programs: dataPrograms.programs  
+      products: dataProducts.product || [], 
+      programs: dataPrograms.programs || []
     });
   } catch (error) {
     console.error('Error fetching products or programs:', error.message);
