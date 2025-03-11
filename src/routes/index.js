@@ -36,3 +36,5 @@ router.use('/all_orders',allOrdersRouter)
 // router.use('/auth', auth);
  
 module.exports = router
+
+console.log("แนนนั่กินกระดาษ")
