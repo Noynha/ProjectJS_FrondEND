@@ -7,20 +7,24 @@ const { default: axios } = require('axios');
 // Routes (หน้าหลัก/หน้าแรก)
 router.get('/', async (req, res) => {
   try {
-    const { data: dataProduct } = await axios.get('/product/');
-    const { data: dataProgram } = await axios.get('/program/');
+    const { data: dataProduct } = await axios.get('http://localhost:5000/api/product');
+    const { data: dataProgram } = await axios.get('http://localhost:5000/api/program');
     
-    if (!dataProduct || !dataProgram) {
-      return res.send('Data not found!');
-    }
+    console.log("Products:", dataProduct);
+    console.log("Programs:", dataProgram);
+
+    // if (!dataProduct || !dataProgram) {
+    //   return res.send('Data not found!');
+    // }
 
     res.render('index', {
-      list_product: dataProduct.data || [],
-      list_program: dataProgram.data || []
+      list_product: dataProduct.product || [],  
+      list_program: dataProgram.programs || [] 
     });
+    
   } catch (error) {
     console.error('🔥 ERROR:', error.response ? error.response.data : error.message);  // เพิ่มการแสดงผลข้อผิดพลาด
-    res.send('Error!!');
+    res.send(`<h1>Error!!</h1><pre>${JSON.stringify(error.response ? error.response.data : error.message, null, 2)}</pre>`);
   }
 })
 
