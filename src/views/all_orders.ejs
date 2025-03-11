@@ -63,3 +63,31 @@
     </section>
 </body>
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // ค้นหา select ทั้งหมดที่มี name="status"
+        const statusSelects = document.querySelectorAll('select[name="status"]');
+        
+        // สำหรับแต่ละ select
+        statusSelects.forEach(select => {
+            // กำหนด class ตามค่าปัจจุบัน
+            updateSelectClass(select);
+            
+            // เพิ่ม event listener สำหรับการเปลี่ยนแปลง
+            select.addEventListener('change', function() {
+                updateSelectClass(this);
+            });
+        });
+        
+        // ฟังก์ชันสำหรับอัปเดต class ตามค่า
+        function updateSelectClass(select) {
+            // ลบ class ทั้งหมดที่เกี่ยวข้องกับสถานะ
+            select.classList.remove('status-done', 'status-in-progress', 'status-waiting');
+            
+            // เพิ่ม class ตามค่าปัจจุบัน
+            const currentValue = select.value;
+            select.classList.add('status-' + currentValue);
+        }
+    });
+    </script>

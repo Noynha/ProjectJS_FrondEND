@@ -111,3 +111,77 @@ td input[type="number"]:focus {
     font-size: 18px;
     color: #777;
 }
+
+/* สไตล์สำหรับ select ในคอลัมน์สถานะ */
+select {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    font-family: 'Krub', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    padding-right: 30px;
+    text-align: center;
+    min-width: 120px;
+}
+
+select:focus {
+    border-color: #558a9b;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(85, 138, 155, 0.2);
+}
+
+/* สไตล์สำหรับตัวเลือกสถานะแต่ละประเภท */
+select option[value="done"] {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+}
+
+select option[value="in-progress"] {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+select option[value="waiting"] {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+
+/* สไตล์สำหรับ select ที่มีค่าเป็น done */
+select[name="status"] option[value="done"]:checked ~ select {
+    background-color: #1b5e20;
+    color: white;
+    border-color: #1b5e20;
+}
+
+/* ตกแต่ง select ตามสถานะที่เลือก */
+select.status-done {
+    background-color: #1b5e20;
+    color: white;
+    border-color: #1b5e20;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(27, 94, 32, 0.3);
+}
+
+select.status-in-progress {
+    background-color: #e65100;
+    color: white;
+    border-color: #e65100;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(230, 81, 0, 0.3);
+}
+
+select.status-waiting {
+    background-color: #0d47a1;
+    color: white;
+    border-color: #0d47a1;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(13, 71, 161, 0.3);
+}
