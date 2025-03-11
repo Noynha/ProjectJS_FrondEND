@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
       list_product: dataProduct.product || [],  
       list_program: dataProgram.programs || [] 
     });
-    
+
   } catch (error) {
     console.error('🔥 ERROR:', error.response ? error.response.data : error.message);  // เพิ่มการแสดงผลข้อผิดพลาด
     res.send(`<h1>Error!!</h1><pre>${JSON.stringify(error.response ? error.response.data : error.message, null, 2)}</pre>`);
