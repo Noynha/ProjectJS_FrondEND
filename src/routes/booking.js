@@ -4,8 +4,8 @@ const moment = require('moment');
 
 bookingRouter.get('/', async (req, res) => {
   try {
-    const { data: dataProducts } = await axios.get('http://localhost:5000/api/product');
-    const { data: dataPrograms } = await axios.get('http://localhost:5000/api/program');
+    const { data: dataProducts } = await axios.get('/product');
+    const { data: dataPrograms } = await axios.get('/program');
     res.render('booking', {
       products: dataProducts.product || [], 
       programs: dataPrograms.programs || []

@@ -7,8 +7,8 @@ const { default: axios } = require('axios');
 // Routes (หน้าหลัก/หน้าแรก)
 router.get('/', async (req, res) => {
   try {
-    const { data: dataProduct } = await axios.get('http://localhost:5000/api/product');
-    const { data: dataProgram } = await axios.get('http://localhost:5000/api/program');
+    const { data: dataProduct } = await axios.get('/product');
+    const { data: dataProgram } = await axios.get('/program');
     
     // if (!dataProduct || !dataProgram) {
     //   return res.send('Data not found!');
