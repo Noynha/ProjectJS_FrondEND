@@ -29,7 +29,6 @@ bookingRouter.post('/', async (req, res) => {
       customer_phone
 } = req.body;
 
-    c
 
     let select_products = [];
     Object.entries(req.body).forEach(([key, value]) => {
