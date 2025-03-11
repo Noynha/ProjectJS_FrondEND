@@ -23,6 +23,7 @@
                         <th>ประเภทสินค้า</th>
                         <th>จำนวนส่งซัก</th>
                         <th>ราคาสินค้า</th>
+                        <th>ราคาโปรแกรม</th>
                         <th>ค่าบริการ</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                                 <td><%= list_report[i].product_type || 'N/A' %></td>
                                 <td><%= list_report[i].item %></td>
                                 <td><%= list_report[i].product_price || 'N/A' %></td>
+                                <td><%= list_report[i].program_price || 'N/A' %></td>
                                 <td><%= list_report[i].total_price %></td>
                             </tr>
                         <% } %>
