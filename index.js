@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
 const app = express()
-const port = 5500
+const port = 3000
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs')
@@ -22,9 +22,9 @@ app.use(morgan('dev'))
 app.use('/', router)
 
 const msg = `Frontend server running on port ${port}` 
-app.get('/', (req, res) => {
-  res.send(msg)
-})
+// app.get('/', (req, res) => {
+//   res.send(msg)
+// })
 
 app.listen(port, () => {
   console.log(msg)

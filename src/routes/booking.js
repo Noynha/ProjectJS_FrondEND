@@ -3,12 +3,15 @@ const bookingRouter = require('express').Router();
 
 bookingRouter.get('/', async (req, res) => {
   try {
-    const { data: dataProduct } = await axios.get('/product');
-    const { data: dataProgram } = await axios.get('/program');
+    const { data: dataProducts } = await axios.get('http://localhost:5000/api/product');
+    const { data: dataPrograms } = await axios.get('http://localhost:5000/api/program');
 
+
+   
+  
     res.render('booking', {
-      list_product: dataProduct,
-      list_program: dataProgram
+      products: dataProducts.products,   
+      programs: dataPrograms.programs  
     });
   } catch (error) {
     console.error('Error fetching products or programs:', error.message);
@@ -18,6 +21,8 @@ bookingRouter.get('/', async (req, res) => {
 
 bookingRouter.post('/', async (req, res) => {
   try {
+    res.send(req.body.radio_program)
+    //res.send(req.body)
     const {
       radio_program,
       date_drop,
@@ -26,7 +31,7 @@ bookingRouter.post('/', async (req, res) => {
       radio_time_take,
       customer_name,
       customer_phone
-    } = req.body;
+} = req.body;
 
     console.log('req.body', req.body);
 

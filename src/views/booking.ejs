@@ -24,11 +24,11 @@
             </tr>
           </thead>
           <tbody>
-            <% for (let i = 0; i < list_product.length; i++) { %>
+            <% for (let i = 0; i < products.length; i++) { %>
               <tr>
-                <td><%= list_product[i].product_type %></td>
-                <td><%= list_product[i].product_price %></td>
-                <td><input type="number" name="select_product|<%= list_product[i].product_id %>" value="" /></td>
+                <td><%= products[i].product_type %></td>
+                <td><%= products[i].product_price %></td>
+                <td><input type="number" name="select_product|<%= products[i].product_id %>" value="" /></td>
               </tr>
             <% } %>
           </tbody>
@@ -40,14 +40,14 @@
         <p>2. บริการ</p>
         <div>
           <ul style="list-style-type: none;">
-            <% for (let i = 0; i < list_program.length; i++) { %>
+            <% for (let i = 0; i < programs.length; i++) { %>
             <li>
-              <input type="radio" name="radio_program" value="<%= list_program[i].program_id %>">
+              <input type="radio" name="radio_program" value="<%= programs[i].program_id %>">
               <span>
-                <%= list_program[i].program_type %>
+                <%= programs[i].program_type %>
               </span>
               <span>
-                ค่าบริการ <%= list_program[i].program_price %> บาท/ตัว
+                ค่าบริการ <%= programs[i].program_price %> บาท/ตัว
               </span>
             </li>
             <% } %>
