@@ -95,10 +95,12 @@ bookingRouter.post('/', async (req, res) => {
     }
 
     // ✅ ตอบกลับเมื่อทุกอย่างเสร็จสมบูรณ์
-    res.status(201).json({ message: 'Booking Created!', 
-      orders_id: orderId 
-    });
-
+    const { data: dataReport } = await axios.get('/report/')
+    
+        res.render('all_orders', {
+          list_report: dataReport.data,
+        })
+        
   } catch (error) {
     console.error('Error creating booking:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });

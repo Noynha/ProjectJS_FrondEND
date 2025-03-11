@@ -12,44 +12,53 @@
     <section class="container">
         <h1>ออเดอร์ทั้งหมด</h1>
         <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>หมายเลขออเดอร์</th>
-                        <th>ชื่อลูกค้า</th>
-                        <th>วันที่ส่งผ้า</th>
-                        <th>วันที่รับผ้า</th>
-                        <th>สถานะ</th>
-                        <th>ประเภทสินค้า</th>
-                        <th>จำนวนส่งซัก</th>
-                        <th>ราคาสินค้า</th>
-                        <th>ราคาโปรแกรม</th>
-                        <th>ค่าบริการ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% if (list_report && list_report.length > 0) { %>
-                        <% for (let i = 0; i < list_report.length; i++) { %>
-                            <tr>
-                                <td><%= list_report[i].orders_id %></td>
-                                <td><%= list_report[i].customer_name %></td>
-                                <td><%= list_report[i].drop_at %></td>
-                                <td><%= list_report[i].take_at %></td>
-                                <td><%= list_report[i].status || 'N/A' %></td>
-                                <td><%= list_report[i].product_type || 'N/A' %></td>
-                                <td><%= list_report[i].item %></td>
-                                <td><%= list_report[i].product_price || 'N/A' %></td>
-                                <td><%= list_report[i].program_price || 'N/A' %></td>
-                                <td><%= list_report[i].total_price %></td>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>หมายเลขออเดอร์</th>
+                            <th>ชื่อลูกค้า</th>
+                            <th>วันที่ส่งผ้า</th>
+                            <th>วันที่รับผ้า</th>
+                            <th>สถานะ</th>
+                            <th>ประเภทสินค้า</th>
+                            <th>จำนวนส่งซัก</th>
+                            <th>ราคาสินค้า</th>
+                            <th>ราคาโปรแกรม</th>
+                            <th>ค่าบริการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (list_report && list_report.length > 0) { %>
+                            <% for (let i = 0; i < list_report.length; i++) { %>
+                                <tr>
+                                    <td><%= list_report[i].orders_id %></td>
+                                    <td><%= list_report[i].customer_name %></td>
+                                    <td><%= list_report[i].drop_at %></td>
+                                    <td><%= list_report[i].take_at %></td>
+                                    <td>
+                                    <form method="POST" action="/all_orders/update_orders_status">
+                                        <input type="hidden" name="orders_id" value="<%= list_report[i].orders_id %>">
+                                        <select name="status" onchange="this.form.submit()">
+                                            <option value="waiting" <%= list_report[i].status === "waiting" ? "selected" : "" %>>Waiting</option>
+                                            <option value="in-progress" <%= list_report[i].status === "in-progress" ? "selected" : "" %>>In Progress</option>
+                                            <option value="done" <%= list_report[i].status === "done" ? "selected" : "" %>>Done</option>
+                                        </select>
+                                    </form>
+                                    </td>
+                                    <td><%= list_report[i].product_types || 'N/A' %></td>
+                                    <td><%= list_report[i].total_item %></td>
+                                    <td><%= list_report[i].total_product_price || 'N/A' %></td>
+                                    <td><%= list_report[i].total_program_price || 'N/A' %></td>
+                                    <td><%= list_report[i].total_price %></td>
+                                </tr>
+                            <% } %>
+                        <% } else { %>
+                            <tr class="no-data">
+                                <td colspan="9">ไม่มีข้อมูลออเดอร์</td>
                             </tr>
                         <% } %>
-                    <% } else { %>
-                        <tr class="no-data">
-                            <td colspan="9">ไม่มีข้อมูลออเดอร์</td>
-                        </tr>
-                    <% } %>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
         </div>
     </section>
 </body>

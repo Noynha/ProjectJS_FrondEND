@@ -14,5 +14,21 @@ allOrdersRouter.get('/', async (req, res) => {
   }
 })
 
+allOrdersRouter.post('/update_orders_status', async (req, res) => {
+  try {
+    const { orders_id , status} = req.body
+    console.log(req.body)
+    await axios.put('/orders?id='+orders_id,{
+      status: status
+    })
+    // alert("Updated!")
+    const { data: dataReport } = await axios.get('/report/')
+    res.render('all_orders', {
+      list_report: dataReport.data,
+    })
+  } catch (error) {
+    res.send('Error!!')
+  }
+})
 
 module.exports = allOrdersRouter
