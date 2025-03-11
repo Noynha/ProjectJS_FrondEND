@@ -45,7 +45,6 @@ bookingRouter.post('/', async (req, res) => {
 
     // ✅ ตรวจสอบว่ามีลูกค้าอยู่แล้วหรือไม่
     const { data: existingCustomer } = await axios.get(`/customer?name=${customer_name}&phone=${customer_phone}`);
-    console.log()
     let customerId;
     if (existingCustomer && existingCustomer.customer_id) {
       customerId = existingCustomer.customer_id;
@@ -55,16 +54,9 @@ bookingRouter.post('/', async (req, res) => {
         name: customer_name,
         phone: customer_phone
       });
-      console.log(newCustomer)
       customerId = newCustomer.data.customer_id;
     }
 
-    console.log({
-      customer_id: customerId,
-      drop_at: `${date_drop} ${radio_time_drop}`,
-      take_at: `${date_take} ${radio_time_take}`,
-      status: 'pending'
-    })
     //✅ สร้าง order ใหม่
     const { data: newOrder } = await 
     axios.post('/orders', {
@@ -79,12 +71,6 @@ bookingRouter.post('/', async (req, res) => {
     // ✅ บันทึก order_detail
     for (const product of select_products) {
       if (product.value > 0) { // ส่งเฉพาะสินค้าที่มีจำนวนมากกว่า 0
-        console.log({
-          orders_id: orderId,
-          product_id: product.id,
-          program_id: radio_program,
-          item: product.value
-        })
         await axios.post('/order_detail', {
           orders_id: orderId,
           product_id: product.id,

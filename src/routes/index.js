@@ -10,9 +10,6 @@ router.get('/', async (req, res) => {
     const { data: dataProduct } = await axios.get('http://localhost:5000/api/product');
     const { data: dataProgram } = await axios.get('http://localhost:5000/api/program');
     
-    console.log("Products:", dataProduct);
-    console.log("Programs:", dataProgram);
-
     // if (!dataProduct || !dataProgram) {
     //   return res.send('Data not found!');
     // }

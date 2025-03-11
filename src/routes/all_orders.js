@@ -17,7 +17,6 @@ allOrdersRouter.get('/', async (req, res) => {
 allOrdersRouter.post('/update_orders_status', async (req, res) => {
   try {
     const { orders_id , status} = req.body
-    console.log(req.body)
     await axios.put('/orders?id='+orders_id,{
       status: status
     })

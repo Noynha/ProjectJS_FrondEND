@@ -21,11 +21,6 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use('/', router)
 
-const msg = `Frontend server running on port ${port}` 
-// app.get('/', (req, res) => {
-//   res.send(msg)
-// })
-
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`)
+  console.info(`Server is running on http://localhost:${port}`)
 })
