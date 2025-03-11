@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
 const app = express()
-const port = 3000
+const port = Math.round(Math.random()*9999)
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs')
