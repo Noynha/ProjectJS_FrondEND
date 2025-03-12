@@ -11,7 +11,7 @@ axios.defaults.baseURL = 'https://node77139-tonchanoy.proen.app.ruk-com.cloud/ap
 // 'http://localhost:3000/api' // local
 
 const app = express()
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 80
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs')
