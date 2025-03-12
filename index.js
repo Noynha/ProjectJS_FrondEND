@@ -7,7 +7,7 @@ const router = require('./src/routes')
 const axios = require('axios')
 const bodyParser = require('body-parser');
 
-axios.defaults.baseURL = 'https://node77139-tonchanoy.proen.app.ruk-com.cloud/api' // rukcom
+axios.defaults.baseURL = 'http://210.246.202.129/api' // rukcom
 // 'http://localhost:3000/api' // local
 
 const app = express()
