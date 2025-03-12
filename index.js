@@ -7,7 +7,9 @@ const router = require('./src/routes')
 const axios = require('axios')
 const bodyParser = require('body-parser');
 
-axios.defaults.baseURL = 'http://localhost:3000/api'
+axios.defaults.baseURL = process.env.NODE_ENV === 'production' 
+  ? 'https://node77139-tonchanoy.proen.app.ruk-com.cloud/'
+  : 'http://localhost:3000/api'
 
 const app = express()
 const port = process.env.PORT || 4000
